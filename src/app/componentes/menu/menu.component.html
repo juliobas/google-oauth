@@ -12,9 +12,20 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-      <ul class="nav navbar-nav navbar-right">
-        <li><a routerLink="/login">Entrar</a></li>
-      </ul>
+      <span class="navbar-text">
+
+        <button (click)="login()"
+                *ngIf="!oauth.autenticado()"
+                type="button"
+                class="btn btn-outline-primary btn-sm">Ingresar</button>
+
+
+        <button (click)="salir()"
+                type="button"
+                *ngIf="oauth.autenticado()"
+                class="btn btn-outline-primary btn-sm">Salir</button>
+
+      </span>
     </div>
   </div>
 </nav>

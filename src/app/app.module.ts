@@ -7,6 +7,8 @@ import { MenuComponent } from './componentes/menu/menu.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { RutasModule } from './/rutas.module';
 
+// servicios
+import { OauthService } from "./servicios/oauth.service";
 
 @NgModule({
   declarations: [
@@ -18,7 +20,7 @@ import { RutasModule } from './/rutas.module';
     BrowserModule,
     RutasModule
   ],
-  providers: [],
+  providers: [OauthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
