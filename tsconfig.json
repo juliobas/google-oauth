@@ -8,6 +8,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es5",
+    "types": ["gapi", "gapi.auth2", "gapi.client", "gapi.client.people"],
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -15,6 +16,6 @@
       "es2017",
       "dom"
     ],
-    "types": ["gapi", "gapi.auth2"]
+
   }
 }

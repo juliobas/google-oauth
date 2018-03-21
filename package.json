@@ -23,8 +23,11 @@
     "@angular/router": "^5.2.8",
     "@types/gapi": "0.0.35",
     "@types/gapi.auth2": "0.0.47",
+    "@types/gapi.client": "^1.0.0",
+    "@types/gapi.client.people": "^1.0.0",
     "core-js": "^2.4.1",
     "gapi-client": "0.0.3",
+    "ng-gapi": "0.0.45",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },

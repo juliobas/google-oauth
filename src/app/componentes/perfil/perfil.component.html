@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-offset-2 col-md-offset-2 col-lg-offset-2 col-sm-8 col-md-8 col-lg-8">
+        <div class="panel panel-primary ventana">
+            <div class="panel-heading">
+              <h2 class="panel-title">
+                Datos Basico de Su perfil de Google
+              </h2>
+            </div>
+            <div class="panel-body" *ngIf="persona">
+              <div class="col-md-4">
+                <img [src]="persona.getImageUrl()"
+                  class="img-fluid">
+              </div>
+              <div class="col-md-8">
+                <ul class="list-group">
+                  <li class="list-group-item"><strong>Nombre Completo:</strong> {{ persona.getName() }}</li>
+                  <li class="list-group-item"><strong>Primer Nombre:</strong> {{ persona.getGivenName() }}</li>
+                  <li class="list-group-item"><strong>Primer Apellido:</strong> {{ persona.getFamilyName() }}</li>
+                  <li class="list-group-item"><strong>Correo:</strong> {{ persona.getEmail() }}</li>
+                </ul>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
