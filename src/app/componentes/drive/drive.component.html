@@ -1,0 +1,14 @@
+<div class="container">
+<div class="row">
+    <div class="col-sm-2 col-md-2" *ngFor='let file of drive.items'>
+      <div class="thumbnail">
+        <img [src]="file.thumbnailLink" [alt]="file.title">
+        <div class="caption">
+          <p>
+            <a href="#" class="btn btn-primary" role="button">Descargar</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

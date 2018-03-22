@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import 'rxjs/add/operator/filter';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as _ from "lodash";
+
 declare const gapi: any;
 
 @Injectable()
 export class OauthService {
 
-  public static TOKEN_SESSION: string = 'tokenAcceso';
-  
-  constructor(public router: Router) { }
+  private static TOKEN_SESSION: string = 'tokenAcceso';
+    
+  constructor(private http:HttpClient) { }
 
   //Metodo Iniciar que carga la libreria gapi
   public CargarCliente(): void {
@@ -62,6 +66,46 @@ export class OauthService {
     let persona = gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile();
     return persona;
         
+  }
+
+  //Metodo que obtiene el token de autenticacion
+  public getToken(): string {
+    let token: string = sessionStorage.getItem(OauthService.TOKEN_SESSION);
+    if (!token) {
+        throw new Error("Tocker no encontrado , Se Requiere autenticacion");
+    }
+    return sessionStorage.getItem(OauthService.TOKEN_SESSION);
+  }
+
+  //Metodo para obtener los archivos de gogole drive
+  getFiles(): Observable<any>{
+    const url = 'https://www.googleapis.com/drive/v2/files';
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Accept': 'application/json --compressed'
+      })
+    };
+
+    return this.http.get(url)
+      .pipe(
+        tap(drive => console.log(`Archivos obtenidos`)),
+        catchError(this.handleError('getFiles', []))
+      );
+  }
+
+  /**
+ * metodo para gestion de errores.
+ * Permite que la app continue.
+ * @param operation - nombre de la operacion que falla
+ * @param result - valor opcional para retornar como result
+ */
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+     
+      console.error(error);
+      console.log(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
   }
 
 }

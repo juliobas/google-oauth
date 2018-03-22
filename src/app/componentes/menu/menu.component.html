@@ -16,6 +16,9 @@
         <li>
           <a [routerLink]="['perfil']" *ngIf="esAutenticado()">Mi Perfil</a>
         </li>
+        <li>
+          <a [routerLink]="['documentos']" *ngIf="esAutenticado()">Mis Documentos</a>
+        </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
        
