@@ -1,14 +1,28 @@
 <div class="container">
 <div class="row">
-    <div class="col-sm-2 col-md-2" *ngFor='let file of drive.items'>
-      <div class="thumbnail">
-        <img [src]="file.thumbnailLink" [alt]="file.title">
-        <div class="caption">
-          <p>
-            <a href="#" class="btn btn-primary" role="button">Descargar</a>
-          </p>
-        </div>
-      </div>
-    </div>
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+        <th></th>
+        <th>Titulo</th>
+        <th>Propietario</th>
+        <th>Ultima Modificacion</th>
+        <th>Tamaño</th>
+        <th>Acciones</th>
+    </thead>
+    <tbody>
+      <tr *ngFor='let file of drive.items'>
+        <td><img [src]="file.iconLink" [alt]="file.title"></td>
+        <td>{{ file.title }}</td>
+        <td>{{ file.ownerNames }}</td>
+        <td>{{ file.modifiedDate }}</td>
+        <td>{{ file.fileSize }}</td>
+        <td>
+            <a class="btn btn-xs btn-info glyphicon glyphicon-folder-open" title="Abrir Carpeta!" data-toggle="tooltip"></a>
+            <a (click)="downloadFile(file.id)" class="btn btn-xs btn-info glyphicon glyphicon-download-alt" title="Descargar!" data-toggle="tooltip"></a>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
   </div>
 </div>

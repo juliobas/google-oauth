@@ -27,7 +27,7 @@ export class OauthService {
         apiKey: 'AIzaSyCxVE409lhAlfkmnctDFd1Wb-fr2ufA0hI',
         discoveryDocs: ["https://people.googleapis.com/$discovery/rest?version=v1"],
         clientId: '572404916269-npse5kiflg8f74jrr7eub9c87ptg49kj.apps.googleusercontent.com',
-        scope: 'profile https://www.googleapis.com/auth/drive.file'
+        scope: 'profile https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/drive.file'
     }).then(()=> {
 
     }).then((response)=> {
@@ -79,13 +79,27 @@ export class OauthService {
 
   //Metodo para obtener los archivos de gogole drive
   getFiles(): Observable<any>{
-    const url = 'https://www.googleapis.com/drive/v2/files';
+    const q="?q=trashed=false and 'root' in parents";
+    const url = 'https://www.googleapis.com/drive/v2/files' + q;
     const httpOptions = {
       headers: new HttpHeaders({
         'Accept': 'application/json --compressed'
       })
     };
 
+    return this.http.get(url)
+      .pipe(
+        tap(drive => console.log(`Archivos obtenidos`)),
+        catchError(this.handleError('getFiles', []))
+      );
+  }
+
+  //Metodo para descar archivos de gogole drive
+  //Aun no funciona correctamente
+  downloadFile(id:string): Observable<any>{
+    const q="?alt=media";
+    const url = 'https://www.googleapis.com/drive/v2/files/' + id + q;
+    
     return this.http.get(url)
       .pipe(
         tap(drive => console.log(`Archivos obtenidos`)),
