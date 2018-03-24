@@ -17,8 +17,7 @@
         <td>{{ file.modifiedDate }}</td>
         <td>{{ file.fileSize }}</td>
         <td>
-            <a class="btn btn-xs btn-info glyphicon glyphicon-folder-open" title="Abrir Carpeta!" data-toggle="tooltip"></a>
-            <a (click)="downloadFile(file.id)" class="btn btn-xs btn-info glyphicon glyphicon-download-alt" title="Descargar!" data-toggle="tooltip"></a>
+            <a (click)="download(file)" *ngIf="isValidFolder(file.mimeType)"  class="btn btn-xs btn-info glyphicon glyphicon-download-alt" title="Descargar!" data-toggle="tooltip"></a>
         </td>
       </tr>
 

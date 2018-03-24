@@ -19,8 +19,9 @@ export class DriveComponent implements OnInit {
     this.auth.getFiles().subscribe(drive => this.drive = drive);
   }
   
-  isValidFolder(filetype): boolean{
-    if (filetype == null) {
+  isValidFolder(mimeType): boolean{
+       
+    if (mimeType !== "application/vnd.google-apps.folder") {
       return true;
     }
     else{
@@ -28,10 +29,13 @@ export class DriveComponent implements OnInit {
     }
   }
   downloadFile(id): void{
-    alert("Entro");
     this.auth.downloadFile(id).subscribe(drive => this.file = drive);
-    window.open(this.file.downloadUrl);
+    window.open(this.file.alternateLink);
 
+  }
+
+  download(file):void{
+    window.open(file.alternateLink);
   }
 
 }
