@@ -78,8 +78,9 @@ export class OauthService {
   }
 
   //Metodo para obtener los archivos de gogole drive
-  getFiles(): Observable<any>{
-    const q="?q=trashed=false and 'root' in parents";
+  getFiles(id:string = "root"): Observable<any>{
+  
+    const q=`?q=trashed=false and '${ id }' in parents`;
     const url = 'https://www.googleapis.com/drive/v2/files' + q;
     const httpOptions = {
       headers: new HttpHeaders({
@@ -94,9 +95,9 @@ export class OauthService {
       );
   }
 
-  //Metodo para descar archivos de gogole drive
+  //Metodo para descargar archivos de gogole drive
   //Aun no funciona correctamente
-  downloadFile(id:string): Observable<any>{
+  /* downloadFile(id:string): Observable<any>{
     const q="?alt=media";
     const url = 'https://www.googleapis.com/drive/v2/files/' + id + q;
     
@@ -105,7 +106,7 @@ export class OauthService {
         tap(drive => console.log(`Archivos obtenidos`)),
         catchError(this.handleError('getFiles', []))
       );
-  }
+  } */
 
   /**
  * metodo para gestion de errores.

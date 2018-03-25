@@ -1,4 +1,15 @@
 <div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+        <ol class="breadcrumb">
+          <li *ngFor='let folder of folders'>
+            <a class="breadcrumb" (click)="breadcrumb(folder)">{{ folder.title }} </a>
+          </li>
+        </ol>
+
+    </div>
+
+  </div>
 <div class="row">
   <table class="table table-striped table-bordered table-hover">
     <thead>
@@ -17,7 +28,8 @@
         <td>{{ file.modifiedDate }}</td>
         <td>{{ file.fileSize }}</td>
         <td>
-            <a (click)="download(file)" *ngIf="isValidFolder(file.mimeType)"  class="btn btn-xs btn-info glyphicon glyphicon-download-alt" title="Descargar!" data-toggle="tooltip"></a>
+          <a (click)="getFiles(file)" *ngIf="isValidFolder(file.mimeType)"  class="btn btn-xs btn-info glyphicon glyphicon-folder-open" title="Ver Carpeta!" data-toggle="tooltip"></a>
+          <a (click)="visualizar(file)" *ngIf="isValidFile(file.mimeType)"  class="btn btn-xs btn-info glyphicon glyphicon-download-alt" title="Descargar!" data-toggle="tooltip"></a>
         </td>
       </tr>
 
